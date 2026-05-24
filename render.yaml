@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: smart-class-attendance
+    env: docker
+    plan: free
+    region: oregon
+    branch: main
+    envVars:
+      - key: SUPABASE_URL
+        sync: false # Will prompt user for project URL in Render Dashboard
+      - key: SUPABASE_KEY
+        sync: false # Will prompt user for anon public API key in Render Dashboard

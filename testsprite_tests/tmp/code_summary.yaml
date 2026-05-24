@@ -1,0 +1,72 @@
+version: "2"
+type: frontend
+tech_stack:
+  - Python
+  - Streamlit
+  - Supabase
+  - face_recognition (dlib)
+  - resemblyzer (torch)
+  - bcrypt
+routes:
+  - path: /
+    file: src/screens/home_screen.py
+    auth_required: false
+    description: Landing page with Teacher/Student entry points
+  - path: teacher
+    file: src/screens/teacher_screen.py
+    auth_required: true
+    description: Teacher dashboard for class management and attendance
+  - path: student
+    file: src/screens/student_screen.py
+    auth_required: false
+    description: Student portal for enrollment and biometric registration
+features:
+  - name: Teacher Registration
+    description: Teachers can create accounts with a username and password
+    files:
+      - src/screens/teacher_screen.py
+      - src/database/db.py
+    entry_route: /
+    user_interactions:
+      - Navigate to Teacher Portal
+      - Click "Register"
+      - Fill username, name, and password
+      - Click "Submit"
+    api_calls:
+      - method: POST
+        endpoint: supabase.teachers
+    auth_required: false
+  - name: Biometric Student Registration
+    description: Students register their face and voice samples for AI attendance
+    files:
+      - src/screens/student_screen.py
+      - src/pipelines/face_pipeline.py
+    entry_route: /
+    user_interactions:
+      - Navigate to Student Portal
+      - Provide name
+      - Use camera to capture face sample
+      - Use microphone to capture voice sample
+    api_calls:
+      - method: POST
+        endpoint: supabase.students
+    auth_required: false
+  - name: AI Attendance via Photo
+    description: Teacher uploads a classroom photo to automatically log attendance
+    files:
+      - src/screens/teacher_screen.py
+      - src/pipelines/face_pipeline.py
+    entry_route: teacher
+    user_interactions:
+      - Log in as Teacher
+      - Select a Subject
+      - Upload classroom photo
+      - Review detected students
+    api_calls:
+      - method: POST
+        endpoint: supabase.attendance_logs
+    auth_required: true
+known_limitations:
+  - issue: Face recognition requires good lighting for high accuracy
+    location: src/pipelines/face_pipeline.py
+    impact: Low lighting may lead to false negatives in attendance logs

@@ -1,0 +1,5 @@
+cmake
+ffmpeg
+libsndfile1
+libopenblas-dev
+liblapack-dev

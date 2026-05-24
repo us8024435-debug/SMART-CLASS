@@ -1,0 +1,30 @@
+# Ignore virtual environments
+venv/
+.env
+env/
+ENV/
+
+# Ignore local Streamlit secrets (so they aren't baked into the image)
+.streamlit/secrets.toml
+
+# Ignore git metadata
+.git
+.github
+
+# Ignore Python caches and build assets
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Ignore tests, logs, and documentation
+testsprite_tests/
+*.log
+*.md
+schema.sql
+
+# Ignore workspace agent metadata
+.agents/
+skills-lock.json

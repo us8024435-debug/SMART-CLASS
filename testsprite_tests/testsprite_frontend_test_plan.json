@@ -1,0 +1,392 @@
+[
+  {
+    "id": "TC001",
+    "title": "Create attendance from a classroom photo review",
+    "description": "This verifies that a teacher can upload a classroom photo, review detected students, and create an attendance record.",
+    "category": "AI Attendance via Photo",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the teacher username field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the teacher password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Select a subject"
+      },
+      {
+        "type": "action",
+        "description": "Upload a classroom photo"
+      },
+      {
+        "type": "action",
+        "description": "Review the detected students"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the attendance record"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a new attendance record is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Log in and choose a subject before taking attendance",
+    "description": "This verifies that a teacher can authenticate, reach the dashboard, and select a subject before starting attendance capture.",
+    "category": "AI Attendance via Photo",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the teacher username field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the teacher password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Select a subject"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the selected subject is shown on the teacher dashboard"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Register a new teacher account from the home page",
+    "description": "This verifies that a teacher can create a new account from the landing page and receive a successful confirmation.",
+    "category": "Teacher Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Teacher Portal entry point"
+      },
+      {
+        "type": "action",
+        "description": "Open the registration form"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a unique username"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the teacher name field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a valid password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the registration form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a successful account creation confirmation is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Complete student enrollment with face and voice samples",
+    "description": "This verifies that a student can enter their name, capture biometric samples, submit enrollment, and see a saved profile confirmation.",
+    "category": "Biometric Student Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Student Portal entry point"
+      },
+      {
+        "type": "action",
+        "description": "Provide the student name"
+      },
+      {
+        "type": "action",
+        "description": "Capture a face sample using the camera"
+      },
+      {
+        "type": "action",
+        "description": "Capture a voice sample using the microphone"
+      },
+      {
+        "type": "action",
+        "description": "Submit the enrollment information"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the student profile registration confirmation is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Access the teacher dashboard with a newly registered account",
+    "description": "This verifies that a newly created teacher can log in and reach the teacher dashboard successfully.",
+    "category": "Teacher Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Teacher Portal entry point"
+      },
+      {
+        "type": "action",
+        "description": "Open the registration form"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a unique username"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the teacher name field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a valid password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the registration form"
+      },
+      {
+        "type": "action",
+        "description": "Log in with the newly created teacher credentials"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the teacher dashboard is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Review unrecognized students before confirming attendance",
+    "description": "This verifies that a teacher can inspect a mixed recognition result and still complete attendance after manual review.",
+    "category": "AI Attendance via Photo",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the teacher username field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the teacher password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Select a subject"
+      },
+      {
+        "type": "action",
+        "description": "Upload a classroom photo with multiple students"
+      },
+      {
+        "type": "action",
+        "description": "Review the detected and unrecognized students"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the attendance record"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the attendance review includes both recognized and unrecognized students"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC007",
+    "title": "Reject teacher registration when required fields are missing",
+    "description": "This verifies that the teacher registration form blocks submission until the required username, name, and password fields are completed.",
+    "category": "Teacher Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Teacher Portal entry point"
+      },
+      {
+        "type": "action",
+        "description": "Open the registration form"
+      },
+      {
+        "type": "action",
+        "description": "Submit the registration form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify validation errors for the required fields are visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC008",
+    "title": "Prevent student enrollment when the name is missing",
+    "description": "This verifies that the student enrollment form requires a name before biometric capture and submission can succeed.",
+    "category": "Biometric Student Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Student Portal entry point"
+      },
+      {
+        "type": "action",
+        "description": "Capture a face sample using the camera"
+      },
+      {
+        "type": "action",
+        "description": "Capture a voice sample using the microphone"
+      },
+      {
+        "type": "action",
+        "description": "Submit the enrollment information"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a validation error for the missing name is visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC009",
+    "title": "Recover from camera or microphone permission denial during student enrollment",
+    "description": "This verifies that a student can see a permission issue during biometric capture and then successfully retry enrollment after granting access.",
+    "category": "Biometric Student Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Student Portal entry point"
+      },
+      {
+        "type": "action",
+        "description": "Provide the student name"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to capture a face sample without camera permission"
+      },
+      {
+        "type": "action",
+        "description": "Attempt to capture a voice sample without microphone permission"
+      },
+      {
+        "type": "action",
+        "description": "Grant the required permissions and capture the samples again"
+      },
+      {
+        "type": "action",
+        "description": "Submit the enrollment information"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the student profile registration confirmation is visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC010",
+    "title": "Retry enrollment after a poor-quality face capture",
+    "description": "This verifies that a student can recover from a failed face recognition attempt caused by poor capture quality and complete enrollment successfully.",
+    "category": "Biometric Student Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Student Portal entry point"
+      },
+      {
+        "type": "action",
+        "description": "Provide the student name"
+      },
+      {
+        "type": "action",
+        "description": "Capture a low-quality face sample using the camera"
+      },
+      {
+        "type": "action",
+        "description": "Capture a better face sample using the camera"
+      },
+      {
+        "type": "action",
+        "description": "Capture a voice sample using the microphone"
+      },
+      {
+        "type": "action",
+        "description": "Submit the enrollment information"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the student profile registration confirmation is visible"
+      }
+    ],
+    "priority": "Low"
+  }
+]

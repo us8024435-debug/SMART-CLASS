@@ -1,0 +1,136 @@
+from src.database.config import supabase
+import bcrypt
+import streamlit as st
+
+def hash_pass(pwd):
+    return bcrypt.hashpw(pwd.encode(), bcrypt.gensalt()).decode()
+
+def check_pass(pwd, hashed):
+    return bcrypt.checkpw(pwd.encode(), hashed.encode())
+
+def check_teacher_exists(username):
+    try:
+        # Check for unique username, returns false when username is already taken
+        response = supabase.table("teachers").select("username").eq("username", username).execute()
+        return len(response.data) > 0
+    except Exception as e:
+        st.error(f"Database error checking teacher: {e}")
+        return False
+
+def create_teacher(username, password, name):
+    try:
+        data = { "username" : username, "password": hash_pass(password), "name": name}
+        response = supabase.table("teachers").insert(data).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error creating teacher: {e}")
+        return None
+
+def teacher_login(username, password):
+    try:
+        response = supabase.table("teachers").select("*").eq("username", username).execute()
+        if response.data:
+            teacher = response.data[0]
+            if check_pass(password, teacher['password']):
+                # Return a copy without password hash for security
+                teacher_copy = teacher.copy()
+                teacher_copy.pop('password', None)
+                return teacher_copy
+    except Exception as e:
+        st.error(f"Database login error: {e}")
+    return None
+
+def get_all_students():
+    try:
+        response = supabase.table('students').select("*").execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error fetching students: {e}")
+        return []
+
+def create_student(new_name, face_embedding=None, voice_embedding=None):
+    try:
+        data = {'name': new_name, 'face_embedding': face_embedding, "voice_embedding": voice_embedding}
+        response = supabase.table('students').insert(data).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error creating student profile: {e}")
+        return None
+
+def create_subject(subject_code, name, section, teacher_id):
+    try:
+        data = {"subject_code": subject_code, "name": name, "section": section, "teacher_id": teacher_id}
+        response = supabase.table("subjects").insert(data).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error creating subject: {e}")
+        return None
+
+def get_teacher_subjects(teacher_id):
+    try:
+        response = supabase.table('subjects').select("*, subject_students(count), attendance_logs(timestamp)").eq("teacher_id", teacher_id).execute()
+        subjects = response.data
+
+        for sub in subjects:
+            sub['total_students'] = sub.get("subject_students", [{}])[0].get('count', 0) if sub.get('subject_students') else 0
+            attendance = sub.get('attendance_logs', [])
+            unique_sessions = len(set(log['timestamp'] for log in attendance))
+            sub['total_classes'] = unique_sessions
+
+            # Fix the typo 'subject_student' -> 'subject_students'
+            sub.pop('subject_students', None)
+            sub.pop('attendance_logs', None)
+
+        return subjects
+    except Exception as e:
+        st.error(f"Database error fetching teacher subjects: {e}")
+        return []
+
+def enroll_student_to_subject(student_id, subject_id):
+    try:
+        data = {'student_id': student_id, "subject_id": subject_id}
+        response = supabase.table('subject_students').insert(data).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error enrolling student: {e}")
+        return None
+
+def unenroll_student_to_subject(student_id, subject_id):
+    try:
+        response = supabase.table('subject_students').delete().eq('student_id', student_id).eq('subject_id', subject_id).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error unenrolling student: {e}")
+        return None
+
+def get_student_subjects(student_id):
+    try:
+        response = supabase.table('subject_students').select('*, subjects(*)').eq('student_id', student_id).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error fetching student subjects: {e}")
+        return []
+
+def get_student_attendance(student_id):
+    try:
+        response = supabase.table('attendance_logs').select('*, subjects(*)').eq('student_id', student_id).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error fetching student attendance: {e}")
+        return []
+
+def create_attendance(logs):
+    try:
+        response = supabase.table('attendance_logs').insert(logs).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error logging attendance: {e}")
+        return None
+
+def get_attendance_for_teacher(teacher_id):
+    try:
+        response = supabase.table('attendance_logs').select("*, subjects!inner(*)").eq('subjects.teacher_id', teacher_id).execute()
+        return response.data
+    except Exception as e:
+        st.error(f"Database error fetching teacher attendance logs: {e}")
+        return []

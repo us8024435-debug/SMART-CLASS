@@ -1,0 +1,26 @@
+# UTILITIES
+numpy<2.0.0
+pandas
+
+# FACE RECOGNITION
+scikit-learn
+dlib-bin
+face_recognition
+git+https://github.com/ageitgey/face_recognition_models
+setuptools<70.0.0
+
+# DATABASE & AUTH
+supabase
+bcrypt
+
+# QR CODES & IMAGES
+segno
+pillow
+
+# VOICE RECOGNITION
+resemblyzer
+librosa
+torch
+
+# APP FRAMEWORK
+streamlit

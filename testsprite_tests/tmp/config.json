@@ -1,0 +1,17 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:8503",
+  "executionArgs": {
+    "projectName": "SMART_CLASS",
+    "projectPath": "d:\\SMART_CLASS",
+    "testIds": [],
+    "additionalInstruction": "Ensure testing covers both teacher login and student registration flows. Validate that the BMW M inspired UI components render correctly.",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-d3hxjWK2SMHEgs8riNZphP_Jzr7g005q5PrlTE9wuuIXxUS40bHr5kJRVejj9ipHoVu7Y8g6pYVFSNZp0NYJO81LCE4tpHhBWk11efEymITZVS_H6T8kC3WzRjsgwOjnT8Q"
+    }
+  },
+  "serverPort": 56212
+}
