@@ -1,5 +1,7 @@
 cmake
+build-essential
 ffmpeg
 libsndfile1
 libopenblas-dev
 liblapack-dev
+libboost-all-dev

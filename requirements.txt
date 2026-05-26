@@ -1,17 +1,14 @@
-# UTILITIES
-numpy<2.0.0
-pandas
-
-# FACE RECOGNITION
-scikit-learn
-dlib-bin
-face_recognition
-git+https://github.com/ageitgey/face_recognition_models
-setuptools<70.0.0
+# APP FRAMEWORK (pinned to support width, shortcut, text_alignment, icon_position)
+streamlit>=1.56.0
 
 # DATABASE & AUTH
 supabase
 bcrypt
+
+# UTILITIES
+numpy<2.0.0
+pandas
+setuptools<70.0.0
 
 # QR CODES & IMAGES
 segno
@@ -20,7 +17,12 @@ pillow
 # VOICE RECOGNITION
 resemblyzer
 librosa
+
+# PyTorch CPU-only (avoids ~2GB CUDA download that times out on Streamlit Cloud)
+--extra-index-url https://download.pytorch.org/whl/cpu
 torch
 
-# APP FRAMEWORK
-streamlit
+# FACE RECOGNITION (dlib-bin provides precompiled dlib; face_recognition_models provides the trained models)
+scikit-learn
+dlib-bin
+git+https://github.com/ageitgey/face_recognition_models
