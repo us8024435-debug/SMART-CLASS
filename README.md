@@ -2,6 +2,8 @@
 
 **Smart Class** is a production-ready, high-performance attendance management platform that leverages cutting-edge Artificial Intelligence to streamline classroom administration. Built with a focus on precision, security, and user experience, it replaces traditional manual roll calls with seamless biometric verification.
 
+LINK : https://smart-class-s1.streamlit.app/
+
 ---
 
 ## 🏗️ System Architecture
